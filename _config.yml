@@ -35,6 +35,3 @@ kramdown:
 # Exclude files from build
 exclude:
   - README.md
-
-plugins:
-  - jekyll-sitemap
