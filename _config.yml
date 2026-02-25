@@ -1,5 +1,6 @@
 ---
 title: Myst1cS04p
+baseurl: ""
 url: "https://myst1cs04p.github.io"
 markdown: kramdown
 theme: null
