@@ -13,11 +13,11 @@ cover: assets/img/articles/covers/minecraft-3.png
 title-image: assets/img/articles/titles/minecraft-3.png
 ---
 
-*This is part of a miniseries of posts about my time running a minecraft SMP. It is recommended that you read [part 1](https://myst1cs04p.github.io/Me/articles/minecraft-1) and [part 2](https://myst1cs04p.github.io/Me/articles/minecraft-2) first*
+*This is part of a miniseries of posts about my time running a minecraft SMP. It is recommended that you read [part 1](https://myst1cs04p.github.io/articles/minecraft-1) and [part 2](https://myst1cs04p.github.io/articles/minecraft-2) first*
 
 ## The Merger Nobody Wanted (Except Me)
 
-After implementing the [governance systems](https://myst1cs04p.github.io/Me/articles/minecraft-2), the server stabilized. We had 15-20 active players. Things were running smoothly.
+After implementing the [governance systems](https://myst1cs04p.github.io/articles/minecraft-2), the server stabilized. We had 15-20 active players. Things were running smoothly.
 
 But I knew something nobody else did: I was planning my exit.
 

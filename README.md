@@ -2,7 +2,7 @@
 
 basically just a place where i dump my game dev projects, tools, or whatever else is rattling around my head. it’s built with Jekyll, looks kinda cyberpunk, and has a lot of neon.
 
-**see it live:** [myst1cs04p.github.io/Me](https://myst1cs04p.github.io/Me)
+**see it live:** [myst1cs04p.github.io](https://myst1cs04p.github.io)
 
 ---
 
@@ -17,7 +17,7 @@ basically just a place where i dump my game dev projects, tools, or whatever els
 ## you can have ts if you want
 
 code isn't that bad, if anyone wants to take it and use it on their own shi, feel free.
-but like if somebody acc does end up using ts, feel free to [reach out](https://myst1cs04p.github.io/Me/#:~:text=2021-,Hit%20Me%20Up!,-Reach%20out%20through) and show it off to me cuz other humans using my work excites me
+but like if somebody acc does end up using ts, feel free to [reach out](https://myst1cs04p.github.io/#:~:text=2021-,Hit%20Me%20Up!,-Reach%20out%20through) and show it off to me cuz other humans using my work excites me
 
 ---
 

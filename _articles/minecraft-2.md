@@ -13,11 +13,11 @@ cover: assets/img/articles/covers/minecraft-2.png
 title-image: assets/img/articles/titles/minecraft-2.png
 ---
 
-*This is part of a miniseries of posts about my time running a minecraft SMP. It is recommended that you read [part 1](https://myst1cs04p.github.io/Me/articles/minecraft-1) first*
+*This is part of a miniseries of posts about my time running a minecraft SMP. It is recommended that you read [part 1](https://myst1cs04p.github.io/articles/minecraft-1) first*
 
 ## The Aftermath
 
-After the [Crystal War](https://myst1cs04p.github.io/Me/articles/minecraft-1), I had a choice: stay bitter about being "right," or actually solve the problem.
+After the [Crystal War](https://myst1cs04p.github.io/articles/minecraft-1), I had a choice: stay bitter about being "right," or actually solve the problem.
 
 I chose the latter.
 
