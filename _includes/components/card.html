@@ -67,32 +67,35 @@
 
 {% elsif include.type == "article" %}
   <!-- Article Card -->
-  <div class="article-card card" 
+   
+  <div class="article-card card"
        onclick="window.location.href='{{ include.url | relative_url }}'"
        style="--hover-color: {{ card_color }}; background-image: url('{% if include.image %}{{ include.image | relative_url }}{% else %}{{ 'assets/img/fallback.png' | relative_url }}{% endif %}');">
-    
-    <div class="article-card__content">
-      <div class="article-card__meta">
-        {% if include.excerpt %}
-        <p class="article-card__excerpt">{{ include.excerpt | truncate: 85 }}</p>
-        {% endif %}
-        
-        <div class="article-card__info">
-          <time class="card__date">{{ include.date | date: "%B %d, %Y" }}</time>
-          {% if include.reading_time %}
-          <span class="article-card__reading-time">{{ include.reading_time }}</span>
+  
+    <a href="{{ include.url | relative_url }}" style="text-decoration: none;">
+      <div class="article-card__content">
+        <div class="article-card__meta">
+          {% if include.excerpt %}
+          <p class="article-card__excerpt">{{ include.excerpt | truncate: 85 }}</p>
           {% endif %}
+          
+          <div class="article-card__info">
+            <time class="card__date">{{ include.date | date: "%B %d, %Y" }}</time>
+            {% if include.reading_time %}
+            <span class="article-card__reading-time">{{ include.reading_time }}</span>
+            {% endif %}
+          </div>
+          <h3 class="article-card__title">
+            {{ include.name }}
+          </h3>
+  
+          <p style="display: none;">
+            <a href="{{ include.url | relative_url }}"></a>
+          </p>
+          
         </div>
-        <h3 class="article-card__title">
-          {{ include.name }}
-        </h3>
-
-        <p style="display: none;">
-          <a href="{{ include.url | relative_url }}"></a>
-        </p>
-        
       </div>
-    </div>
+    </a>
   </div>
 
 {% endif %}
