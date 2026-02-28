@@ -5,8 +5,8 @@ date: 2025-02-15
 author: Myst1cS04p
 tags: [discord, api, python, library design, tooling]
 color: "#1b76ffff"
-excerpt: "Discord recently introduced a native polling system. It’s clean, built into the platform, and honestly much nicer than the reaction-based polls most bots use. The problem? There wasn’t a simple, lightweight Python wrapper that let you create and manage these polls without dragging in an entire Discord bot framework."
-description: "Discord recently introduced a native polling system. It’s clean, built into the platform, and honestly much nicer than the reaction-based polls most bots use. The problem? There wasn’t a simple, lightweight Python wrapper that let you create and manage these polls without dragging in an entire Discord bot framework."
+excerpt: "My first async Python project, first time writing unit tests, first time actually shipping something meant to be used as a library. It worked perfectly in isolated testing. Then I tried integrating it into my actual bot, and everything fell apart."
+description: "My first async Python project, first time writing unit tests, first time actually shipping something meant to be used as a library. It worked perfectly in isolated testing. Then I tried integrating it into my actual bot, and everything fell apart."
 reading_time: "5 min read"
 css: assets/css/articles.css
 cover: assets/img/articles/covers/pollcord.gif
@@ -15,299 +15,130 @@ title-image: assets/img/articles/titles/pollcord.png
 
 ## Why I Built It
 
-Discord recently introduced a native polling system. It’s clean, built into the platform, and honestly much nicer than the reaction-based polls most bots use. The problem? There wasn’t a simple, lightweight Python wrapper that let you create and manage these polls without dragging in an entire Discord bot framework.
+Discord recently introduced a native polling system. It's clean, built into the platform, and honestly much nicer than the reaction-based polls most bots use. The problem? There wasn't a simple, lightweight Python wrapper that let you create and manage these polls without dragging in an entire Discord bot framework.
 
-Most existing solutions assumed you were already using a large library like `discord.py` or similar. That’s fine if you’re building a full bot, but not great if you just want to integrate polling into an existing async system or microservice.
+Most existing solutions assumed you were already using a large library like `discord.py` or similar. That's fine if you're building a full bot, but not great if you just want to integrate polling into an existing async system or microservice.
 
-So I built **Pollcord** — a small wrapper around Discord’s poll API designed to:
+So I built **Pollcord**: a small wrapper around Discord's poll API. It could create polls, track state, run callbacks when polls ended, fetch vote counts. Lightweight. Framework-agnostic. Exactly what I wanted.
 
-* Create polls with a simple function call
-* Track poll state locally
-* Run callbacks when polls end
-* Fetch vote counts and users
-* Stay lightweight and framework-agnostic
+It worked perfectly in isolated testing.
 
-It was supposed to be simple.
+Then I tried integrating it into my actual bot, and everything fell apart.
 
-It was not.
+This is a postmortem on what went wrong, not a library announcement. Pollcord is not stable, not production-ready, and I didn't have immediate plans to finish it when I started writing this. What I do have is a reasonably clear understanding of why async systems fail in ways that unit tests don't catch, which is the part worth writing about.
+
+> **Update:** About a week after writing this, I did end up doing a lot more work on Pollcord. It still hasn't gone through live testing, but it's considerably more stable now.
 
 ---
 
 ## Context
 
-At the time, I was in a phase where I wanted to strip things down and build something minimal, just to see how the pieces would fit together. The goal wasn’t to ship quickly or make something production-ready. It was to test ideas, validate assumptions, and figure out what worked and what didn’t.
+This project was a pile of firsts for me.
 
-I started by creating the initial version of the wrapper, which worked perfectly in isolated testing. I could:
+First time writing async Python. First time actually writing unit tests and setting up CI/CD workflows. And the first time I'd managed to fully execute the vision of building something as a *library* - something other code consumes as a dependency.
 
-* Create polls
-* Let them expire
-* Trigger callbacks
-* Fetch results
+That last one matters more than it sounds. Writing a library is a different mindset than writing an application. An application can make assumptions about its environment. A library can't. The caller controls the execution context, the event loop, the timing, and a dozen other things you'd normally take for granted. I didn't fully appreciate that going in.
 
-Everything behaved exactly as expected. Confident in the results, I released a beta.
+I was also in that phase again as a developer where you look at polished, stable libraries and think: "I could do that." I saw the Discord poll API, saw that nothing lightweight existed for it, and said "Pfft. I'll just make it."
 
-Then, I tried integrating it into my actual bot. That’s when everything fell apart.
+It was meant to be simple.
 
-What worked in a controlled test environment started breaking in real usage:
+It was not simple T-T
 
-* Polls ending twice
-* Callbacks firing inconsistently
-* End logic creating weird loops
-* Edge cases I hadn’t even considered
+The initial build actually went surprisingly smoothly. I designed it like an event system, inspired by how I'd seen Unity handle events, since that felt natural and clean to me. I could create polls, let them expire, trigger callbacks, fetch results. Everything behaved exactly as expected.
 
-The wrapper wasn’t broken in an obvious way. It was worse: it was subtly wrong. And subtle async bugs are the worst kind.
+Confident, I released a beta. Then I tried integrating it into my actual bot.
 
-Two months ago, I paused the project at a very early stage. It never reached a stable or usable state, and it’s important to be clear about that. Right now, it’s more of a prototype or a technical sketch than a real product.
+What worked in controlled testing started breaking in real usage almost immediately:
 
-To be explicit:
+- Polls ending twice
+- Callbacks firing inconsistently
+- End logic creating weird loops
+- Edge cases I hadn't begun to conceptualize
 
-* It is not stable.
-* It should not be used for anything serious.
-* I don’t have any immediate plans to finish or productionize it.
-
-This blog post is more of a technical reflection than a product announcement.
+What didn't help was my callback system, which was literally three different functions at three different layers of the system, all capable of triggering a callback, and all named essentially the same thing. Every debugging session started with ten minutes of just figuring out which one had fired.
 
 ---
+
 
 ## Technical Challenges
 
-### 1. Poll Lifetime vs. Local State
+### 1. The Two-Clock Problem
 
-Discord manages poll expiration on its servers.
-My wrapper also tracked poll duration locally to trigger callbacks.
+Discord manages poll expiration on its servers. My wrapper also tracked duration locally to know when to fire the callback. Two independent clocks. On paper that's fine; however, in practice it meant `_schedule_end` was setting `self.ended = True` inline, completely separate from the `end()` method that was supposed to be the single source of truth for poll termination.
 
-That created two independent “clocks”:
+So you'd end up with situations where the local scheduler fired, set `ended = True`, ran the callback, and then a manual `end_poll()` call came in a fraction of a second later, didn't see `ended = True` yet due to timing, and ran the callback again. Or the reverse: Discord expired the poll, the local clock hadn't fired yet, and the callback never ran because the code path that checked `ended` was in the wrong place.
 
-* Discord’s poll expiration
-* My local async scheduler
-
-If those two ever got out of sync, strange things happened:
-
-* Poll ended locally but not on Discord
-* Poll ended on Discord but callback never fired
-* Callback firing twice
+The fix was giving Discord's clock priority and routing everything through a single `end()` method. Once that was the only place that could set `ended = True` and trigger the callback, the two clocks stopped conflicting.
 
 ---
 
-### 2. The Callback Recursion Trap
+### 2. The Recursion Trap I Built On Purpose
 
-One of the early designs looked something like this:
+The old `Poll.end()` had an optional `client` parameter:
 
-```
-client.end_poll()
-    → poll.end()
-        → client.end_poll()
+```python
+async def end(self, client: Optional["PollClient"] = None):
+    if not self.ended:
+        if client:
+            await client.end_poll(self)
+        self.ended = True
+        ...
 ```
 
-That’s a recursion loop disguised as “clean separation of concerns.”
+And `PollClient.end_poll()` called `await poll.end()` after hitting the API.
 
-In theory, it made sense:
+So: `poll.end(client)` ->> `client.end_poll(poll)` ->> `poll.end()`. A full loop. I built it thinking it was clean separation, in the sense that, the poll handles its own lifecycle, the client handles the API call. What I'd actually built was a recursion trap that would either blow up immediately or, worse, silently eat API calls and produce duplicate callbacks depending on where in the cycle the `ended` flag got checked.
 
-* The client ends the poll via API
-* The poll object handles its own lifecycle
-
-In practice:
-
-* A small logic mistake could cause infinite API calls
-* Or double callbacks
-* Or inconsistent poll state
-
-Async recursion through network calls is not something you want to debug at 2 a.m.
+Async recursion through network calls doesn't fail immediately. It just produces increasingly wrong behavior until you stare at logs long enough to trace the call stack manually.
 
 ---
 
-### 3. Race Conditions Between Manual and Scheduled Ends
+### 3. The Race Condition Hidden in Sequential Loops
 
-Two different things could try to end the same poll:
+`get_vote_users` and `get_vote_counts` both used a plain `for` loop to fetch results per option:
 
-1. The scheduled expiration task
-2. A manual `end_poll()` call
+```python
+for index in range(len(poll.options)):
+    users = await self.fetch_option_users(poll, index)
+    results.append(users)
+```
 
-If they happened at the same time, both could:
-
-* Mark the poll as ended
-* Fire the callback
-* Cancel each other’s tasks
-
-Result: duplicate results, inconsistent logs, and very confusing behavior.
+Sequential. One request at a time. Which meant if you called both at roughly the same time, say, a scheduled expiry and a manual results fetch landing within the same event loop tick, then they'd both be making overlapping API calls with no coordination between them. Combined with the callback system that could fire from multiple places, you'd get duplicate results and state that diverged depending on which awaited call returned first.
 
 ---
 
-### 4. Rate Limits and API Response Handling
+### 4. The Rate Limiter That Assumed Everything
 
-Discord rate limits aggressively.
-My first implementation assumed:
+The original retry logic looked like this:
 
-* The API always returns JSON
-* `retry_after` is always present
-* The response format is predictable
+```python
+if r.status == 429:
+    data = await r.json()
+    wait_time = data["retry_after"]
+    await asyncio.sleep(wait_time)
+```
 
-None of those assumptions are safe.
+I later realized there there were actually three assumptions baked in here: the 429 response is always JSON, `retry_after` is always present in the body, and there's no such thing as a global rate limit. Discord violates all three of these regularly. Sometimes the rate limit response is plain text. Sometimes `retry_after` is in the headers rather than the body. Sometimes you've hit a global limit that applies across all endpoints, not just the one you're hammering.
 
-In real usage, you have to handle:
-
-* Text responses
-* Missing fields
-* Headers instead of JSON values
-* Temporary API quirks
-
-Otherwise your “simple wrapper” becomes a crash generator.
+Each assumption was a separate crash waiting to happen. And because the retry logic lived inline in `__get_request` and `__post_request`, duplicated, with `max_retries` passed as a parameter to each individual call, there was no single place to fix any of it.
 
 ---
 
-## Overcoming the Issues
+## What Actually Transferred
 
-### 1. Clear Separation of Responsibilities
+Overall, I learnt a lot. Ever since then I've been writing tests for basically anything I developer, and leveraging async ruthlessly. Not to mention the absolute powerhouse that CI/CD is. 
 
-The final design rule became:
+Importantly, I learnt that: async code that passes tests is not the same as async code that's correct.
 
-* **Poll objects never talk to the API**
-* **PollClient handles all API interaction**
-* Poll only manages local state and callbacks
+Unit tests, by default, test the happy path. They run in isolation, in a controlled order, with predictable timing. Real usage is none of those things. Real usage has users doing two things at once, network calls taking variable time, and Discord occasionally returning a plain text error where you expected JSON.
 
-That eliminated recursion risks and made the control flow obvious.
+The tests aren't wrong, they're just not asking the right questions. You have to explicitly test for concurrency, for timing, for failure modes. The happy path is the easy part.
 
 ---
 
-### 2. Making Poll Termination Atomic
+The wrapper is sitting on GitHub. Maybe I'll come back to it for real. Maybe I won't.
 
-To prevent race conditions, poll termination was guarded with an async lock:
+Either way: first async project, first unit tests, first library. All three taught me something I couldn't have learned by just reading about it.
 
-* If two tasks try to end the poll
-* Only one actually runs the callback
-* The other exits silently
-
-This guarantees:
-
-* Callback fires once
-* State stays consistent
-* No weird timing bugs
-
----
-
-### 3. Defensive Networking Code
-
-The HTTP layer was hardened to:
-
-* Handle both JSON and text responses
-* Respect rate limits from either JSON or headers
-* Retry safely without infinite loops
-
-Instead of assuming the API behaves nicely, the code now assumes it will eventually do something weird.
-
-Because it will.
-
----
-
-### 4. Strict Validation
-
-Before even touching the API, the wrapper now checks:
-
-* Minimum and maximum option counts
-* Session initialization
-* Valid response structure
-
-Failing early is better than failing mysteriously.
-
----
-
-## What I Learned
-
-A few important lessons came out of this:
-
-### Async code that “works” is not necessarily correct
-
-If your tests don’t simulate real concurrency, you’re just testing the happy path.
-
-Real users create edge cases you never thought of.
-
----
-
-### Separation of concerns matters more in async systems
-
-Circular logic that might work in synchronous code becomes dangerous when:
-
-* Tasks run concurrently
-* Network calls are involved
-* State can change mid-execution
-
----
-
-### Race conditions are silent killers
-
-They don’t crash your code immediately.
-
-They just:
-
-* Fire callbacks twice
-* Lose state
-* Produce inconsistent behavior
-
-And those bugs are much harder to detect.
-
----
-
-## Future Plans
-
-There are several improvements planned for the wrapper:
-
-### 1. Poll Manager
-
-A centralized system to:
-
-* Track active polls
-* Restore them after restarts
-* Prevent orphaned poll objects
-
----
-
-### 2. Persistence Support
-
-Right now, polls exist only in memory.
-Future versions may support:
-
-* Redis
-* SQLite
-* Custom storage backends
-
-So polls survive bot restarts.
-
----
-
-### 3. Better Result Handling
-
-Planned additions:
-
-* Built-in result formatting
-* Winner detection
-* Tie handling utilities
-
----
-
-### 4. Framework Integrations
-
-Optional adapters for:
-
-* discord.py
-* nextcord
-* py-cord
-
-Without forcing users to adopt a specific framework.
-
----
-
-## Closing Thoughts
-
-The first version of this wrapper worked perfectly in testing.
-It only started breaking once it faced real concurrency, real users, and real timing.
-
-That experience was frustrating, but also valuable.
-It forced a better architecture, safer async patterns, and more defensive code.
-
----
-
-You can [check it out](https://github.com/Myst1cS04p/Pollcord/) if you want to have a go at my shit code XD
-
----
-
-***disclaimer***: *this post was partially written by AI*
+[Check it out here](https://github.com/Myst1cS04p/Pollcord/) if you want to see the code.
