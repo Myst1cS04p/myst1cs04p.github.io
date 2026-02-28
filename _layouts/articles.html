@@ -27,16 +27,18 @@ css: assets/css/articles.css
   <section class="articles-grid">
     {% assign sorted_articles = site.articles | sort: 'date' | reverse %}
     {% for article in sorted_articles %}
-      {% include components/card.html 
-         type="article"
-         name=article.title
-         image=article.title-image
-         date=article.date
-         url=article.url
-         color=article.color
-         excerpt=article.excerpt
-         reading_time=article.reading_time
-      %}
+      {% if article.unlisted != true %}
+        {% include components/card.html 
+          type="article"
+          name=article.title
+          image=article.title-image
+          date=article.date
+          url=article.url
+          color=article.color
+          excerpt=article.excerpt
+          reading_time=article.reading_time
+        %}
+      {% endif %}
     {% endfor %}
   </section>
 
