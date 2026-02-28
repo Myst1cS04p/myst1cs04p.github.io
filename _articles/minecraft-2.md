@@ -17,15 +17,15 @@ title-image: assets/img/articles/titles/minecraft-2.png
 
 ## The Aftermath
 
-After the [Crystal War](https://myst1cs04p.github.io/articles/minecraft-1), I had a choice: stay bitter about being "right," or actually solve the problem.
+After the [Crystal War](https://myst1cs04p.github.io/articles/minecraft-1), I had a choice: stay bitter about being right, or actually solve the problem.
 
 I chose the latter.
 
 The core issue wasn't about crystals. It was about **governance**. My friends didn't leave because they hated end crystals—they left because they felt unheard. The server had no framework for resolving disputes. No transparency. No checks and balances.
 
-Just me, insisting I was right, while everyone else voted with their feet.
+So I did what any sane reasonable person would do: I built a political system for a Minecraft server. 
 
-So I did what any sane reasonable person would do: I built a political system for a Minecraft server. Obviously.
+Obviously.
 
 ---
 
@@ -165,7 +165,7 @@ This is a lesson that applies way beyond Minecraft:
 
 ---
 
-## Systems > Personalities
+## Systems Trump Personalities
 
 Before this, the server ran on unsaid rules, and unsaid norms. "We're all friends, so we'll figure it out."
 
@@ -183,17 +183,11 @@ The SpyCord plugin meant that players no longer had to worry about players havin
 
 ## What Actually Happened
 
-With these systems in place, people came back, and the server stabilized.
+With these systems in place, people came back. Not because I'd won the argument about crystals, that argument was long dead, but because the server finally had a framework that felt legitimate even when it didn't give everyone what they wanted. Disputes got resolved through processes instead of shouting in vc for 3 hours. The population grew from 5-8 to a consistent 15-20.
 
-This didn't happen because I'd "won" the argument. But because the server finally had a framework that felt legitimate. Disputes got resolved through process, not shouting matches. Changes happened through an agreed upon voting system, not mob pressure.
+I'd spent weeks thinking the problem was about end crystals. It wasn't. It was about whether people felt like the rules could change, whether their voice had weight, whether someone was secretly pulling strings they couldn't see. Build systems that answer those questions honestly, and you'd be surprised what people will put up with.
 
-The server stabilized. Population started growing. We went from the "Aternos Era" of 5-8 players to a consistently active community of 15-20.
-
-And then we merged with another SMP.
-
-That's when things got *really* interesting.
-
-But that's a story for Part 3.
+That said — 15-20 players on a server designed for more is a stable equilibrium, not a destination. I had bigger plans. And I knew exactly where to find more people.
 
 ---
 

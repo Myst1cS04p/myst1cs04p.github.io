@@ -77,38 +77,17 @@ Empty.
 
 ---
 
-## The Lesson: Correctness ≠ Authority
+## Putting the Sword Down
 
-This is where most people would say "I was right, they were wrong, the end."
+Here's what I actually learned, and it took me longer than it should have:
 
-But here's what I actually learned:
+Being right doesn't give you authority. Which sounds really weird, because we'd all just love to pretend that we live in a meritocratic world where being good, or right, or the most correct is enough to do anything.
 
-**Being right doesn't give you authority.**
+I had the logically sound argument. Crystals are vanilla. Banning mechanics because of skill issues is bad game design. Majority rule can be tyrannical. All true. All completely irrelevant.
 
-I had the logically sound argument:
-- Crystals are vanilla
-- Banning mechanics because of skill issues is bad game design
-- Majority rule can be tyrannical
+This actually answered something I'd wondered about offline too: why do we use democracy when democracy just hands power to the majority? Why would you effectively give a gun to a mob?
 
-All true. All irrelevant.
-
-Because a leader's job isn't to be the smartest person in the room. It's to **keep people in the room**.
-
-The harsh realities I discovered:
-
-### 1. Democracy isn't about finding the "best" choice
-Democracy is about **buy-in**. When people don't feel heard, they leave. It doesn't matter if you're objectively correct.
-
-This actually answered a question I'd had offline as well - Why do we go for democracy when democracy gives the majority the power to ruin everything. Why would we effectively hand a gun to a bunch of idiots?
-
-Turns out it isn't really about democracy per se, or about being right, or efficiency. It's about people being able to go along with it.
-
-It's like a playground, if more of the people wanna play football, and fewer people wanna play tennis, you'd go with football. Not because football is the better sport, or because the people who want to play tennis are wrong, but because it's not as fun to be playing with less space and less people. 
-
-### 2. The Minority of One Problem
-When 99% of your population hates a rule, the rule isn't "fair" anymore—it's an obstacle to their enjoyment. Your technical correctness becomes functionally equivalent to tyranny.
-
----
+Turns out it's not really about finding the right answer. It's about whether people can live with the answer. It's like a playground; if more people want to play football and fewer want tennis, you go with football. Not because football is the better sport, but because playing with half the people on half the space isn't fun for anyone. The minority isn't wrong. The majority isn't right. It's just that consensus has a value that correctness doesn't.
 
 I had won every argument. I had won the 1vAll fight.
 

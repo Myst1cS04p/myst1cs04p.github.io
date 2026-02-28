@@ -223,31 +223,6 @@ Why? Because everyone had watched me conduct a transparent investigation. They'd
 
 ---
 
-## A Few Takeaways
-
-This entire saga taught me:
-
-### 1. Always Retain Leverage
-That deal negotiation—keeping control of both the Minecraft server AND the Discord—saved everything. If Phrase had owned the Discord, he could have fractured the community the moment things got difficult.
-
-You don't have to be controlling or force scummy deals, but be wary of power entrenchment.
-
-### 2. Transparency Doesn't Mean Weakness
-Conducting the investigation publicly, showing my work, admitting when I couldn't prove something—all of that built more trust than any amount of authoritarian "I'm right because I said so" ever could.
-
-I think it probably amplified trust more than anything else. Phrase got unbanned in light of new evidence. So, don't be afraid of being wrong. Own up. It isn't always pretty but it's worth it.
-
-### 3. Systems Survive People
-Phrase turned out to be a cheater. Apple turned out to be toxic and manipulative. But the server survived both of them because it didn't depend on any individual's integrity—it depended on transparent, auditable systems.
-
-I didn't catch them because I'm some sort of mastermind genius, but because I designed things in such a way that you simply couldn't get away with cheating for long.
-
-The weighted democracy kept running. The SpyCord logs kept logging. The layered rule system kept disputes from becoming existential crises.
-
-**The server didn't need perfect people. It needed resilient systems.**
-
----
-
 ## The Succession That Never Happened
 
 Remember how I said I wanted to train Phrase as my replacement?
@@ -327,26 +302,6 @@ The transparency systems built trust, but they couldn't manufacture fun or commu
 The layered rule system created structure, but structure doesn't matter when there's nobody left to structure.
 
 I'd built a constitutional democracy for a block game, and it died anyway.
-
----
-
-## What I Actually Learned
-
-But here's the thing: **the lessons are bigger than the server.**
-
-Those unsolved problems—how do you build communities that survive founder departure? How do you balance growth with intimacy? How do you make systems that feel human instead of bureaucratic? Those are all problems, I still think about, and will continue to think about, and work on, until I find some sort of solution that scratches the itch.
-
-Those problems manifest in other forms now. When I think about product design. When I think about team dynamics. When I think about any system where humans have to coordinate and trust each other.
-
-The problems are universal. The lessons transfer.
-
-I learned that:
-- Power without legitimacy is tyranny waiting to collapse
-- Transparency (to an extent) is the cornerstone of trust
-- Systems can't save a community that's naturally reached its end
-- Sometimes the mature decision is to let things die
-
-That last one's the hardest. But it's also the most important.
 
 ---
 
