@@ -11,7 +11,7 @@ reading_time: "14 min read"
 css: assets/css/articles.css
 cover: assets/img/articles/covers/think_cover.png
 title-image: assets/img/articles/titles/think.png
-untitled: true
+unlisted: true
 ---
 
 There is a pattern that shows up everywhere once you start looking for it.
