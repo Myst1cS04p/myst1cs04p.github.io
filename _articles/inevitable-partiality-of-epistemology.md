@@ -11,6 +11,7 @@ reading_time: "12 min read"
 css: assets/css/articles.css
 cover: assets/img/articles/covers/partiality.png
 title-image: assets/img/articles/covers/partiality.png
+unlisted: true
 ---
 
 
@@ -145,5 +146,3 @@ That incompleteness is not a reason not to try. Incomplete examination is still 
 ---
 
 *The harder question, what a well-examined grounding should look like, and how you'd know if you had one, doesn't resolve cleanly here. I'm not sure it should resolve in a single piece. But it is downstream of this one. Most people never get there, because they haven't accepted the prior premise: that they are standing somewhere, operating from something, and have been all along.*
-
-*This essay is not AI generated.*

@@ -11,6 +11,7 @@ reading_time: "12 min read"
 css: assets/css/articles.css
 cover: assets/img/articles/covers/brain.png
 title-image: assets/img/articles/titles/brain.jpeg
+unlisted: true
 ---
 
 There is a thought experiment I keep returning to. Take two people. One is surviving on two meals a day, sleeping poorly, in a living situation that is unstable and occasionally threatening. The other is comfortable — fed, rested, relatively secure. Now administer an IQ test and compare the scores. The comfortable person scores higher. The obvious inference is that they are more intelligent.
@@ -104,5 +105,3 @@ That should make us considerably more humble about what we think we know.
 ---
 
 *The empirical questions here — about the structure of the allocation system, the degree to which it's trainable, what interventions actually shift it — deserve more careful attention than I've given them. This is the philosophical frame. The next step is finding whether the literature has already built the building I've been imagining the blueprints for.*
-
-*This essay was restructured and enhanced with the help of AI.*

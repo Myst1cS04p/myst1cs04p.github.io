@@ -113,5 +113,3 @@ I’m 10x better now, but I still have a soft spot for this messy, orange-and-bl
 ---
 
 You can [see the chaos for yourself here](https://github.com/Myst1cS04p/Gaming-Site).
-
-*Ironically I got Gemini to write ts for me. Crazy downfall ngl. From builing flask sites with no AI to not being able to manually type a 100 lines.*

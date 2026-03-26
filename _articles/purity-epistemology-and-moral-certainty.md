@@ -11,6 +11,7 @@ reading_time: "14 min read"
 css: assets/css/articles.css
 cover: assets/img/articles/covers/think_cover.png
 title-image: assets/img/articles/titles/think.png
+untitled: true
 ---
 
 There is a pattern that shows up everywhere once you start looking for it.
@@ -154,5 +155,3 @@ The open loop is not the enemy. The open loop is where you're still learning.
 ---
 
 *There's more to say about this — specifically about how the loss-of-optionality frame applies not just to gaming disorder but to the structural logic of purity projects across domains, and about what a properly operationalized maintenance epistemology might look like. Those are separate papers. For now: this is a rough map, honestly labeled.*
-
-*This piece is primarily written by AI.*

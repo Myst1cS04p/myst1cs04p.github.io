@@ -374,4 +374,3 @@ That's worth more than a trophy someone else is holding.
 ---
 
 You can [play it here](https://myst1cs04p.itch.io/chickens-vs-humans) if you want to see what four weeks of solo panic looks like.
-***disclaimer***: *this post was partially written by AI, but I did decide to put some effort in this time lol.*

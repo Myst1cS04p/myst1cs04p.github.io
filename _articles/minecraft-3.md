@@ -330,5 +330,3 @@ Projects end. That's okay. What matters is what you take with you when they do.
 *This is Part 3 of a 3-part series. If you made it this far, you've witnessed the full arc: from skill-based civil war, to constitutional engineering, to forensic investigation, to the mature realization that not everything needs a happy ending.*
 
 *The server died. I moved on. Life continued.*
-
-*This post, was not written by AI :)*

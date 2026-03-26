@@ -122,4 +122,4 @@ I had power. I was about to learn how to build authority.
 
 ---
 
-*This is Part 1 of a 3-part series on running a Minecraft server that grew to 6x its initial population, survived multiple civil wars, and taught me more about leadership than any textbook ever could. And yes, once again, this post was written by AI. It's just faster that way honestly.*
+*This is Part 1 of a 3-part series on running a Minecraft server.*
