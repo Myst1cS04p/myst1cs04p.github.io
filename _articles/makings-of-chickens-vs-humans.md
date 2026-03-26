@@ -57,21 +57,21 @@ I was too shy and too young to say anything. I just watched her walk away with t
 
 I learned more from this experience about working with people than I did from any actual teamwork.
 
-**Lesson 1: People will take credit for work they didn't do.**
+**People will take credit for work they didn't do.**
 
 And if you're young, quiet, or conflict-averse, they'll get away with it.
 
-**Lesson 2: The label "Team leader" doesn't always mean "person who leads."**
+**The label "Team leader" doesn't always mean "person who leads."**
 
 In this case it just meant "person who talks the most" or "person who shows up at the end." 
 
 Leadership is functional. Often the label lags behind the contribution.
 
-**Lesson 3: You can't rely on people who aren't invested.**
+**You can't rely on people who aren't invested.**
 
 If someone isn't contributing early, they won't suddenly become helpful later. Hoping they will just wastes your time.
 
-**Lesson 4: Speak up or get walked over.**
+**Speak up or get walked over.**
 
 I didn't complain to the coordinators. I didn't push back when the team leader took the plaque. I didn't advocate for myself.
 

@@ -89,13 +89,13 @@ I didn't use UUIDs. I used `random.randint(00000000, 99999999)`. I even wrote a 
 
 This project was my introduction to the **"Deep End."** 
 
-**Lesson 1: Documentation is the only friend you have.**
+**Documentation is your best friend.**
 Without AI to explain things, I had to learn how to read the Flask documentation and the CS50 library specs. It taught me how to find answers for myself—a skill that is arguably becoming a lost art in the age of "Just ask ChatGPT."
 
-**Lesson 2: State management is hard.**
+**State management is hard.**
 Trying to keep a user logged in, tracking their "best wave," and routing them through different templates was my first taste of how complex web logic really is.
 
-**Lesson 3: Completion > Perfection.**
+**Completion > Perfection.**
 I didn't submit it because it wasn't "perfect" or finished. In hindsight, I should have. The fact that an 11-year-old built a functional registration system with database persistence is an achievement in itself.
 
 ---
